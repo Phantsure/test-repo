@@ -8,7 +8,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     name: runner-cache upload (${{ matrix.os }})
     steps:
     - uses: actions/checkout@v3
@@ -20,10 +20,7 @@ jobs:
     - if: ${{ runner.os != 'Windows' }}
       shell: bash
       run: ln -s ./test.txt test-cache/link.txt
-    - if: ${{ runner.os == 'Windows' }}
-      shell: cmd
-      run: mklink test-cache/link.txt ./test.txt
-    - uses: actions/cache@v3.2.1
+    - uses: actions/cache@main
       with:
         path: test-cache
         key: ${{ matrix.os }}-runner-${{ github.run_number }}-${{ github.run_attempt }}
@@ -32,8 +29,8 @@ jobs:
     needs: upload
     strategy:
       matrix:
-        os: [windows-latest]
-        key: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        key: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     name: runner-cache restore (${{ matrix.os }}) with key (${{ matrix.key }})
     steps:
@@ -43,20 +40,18 @@ jobs:
       run: |
         #export MSYS=winsymlinks:nativestrict
         #rm "C:\Program Files\Git\usr\bin\tar.exe"
-    - uses: actions/cache@v3.2.1
+    - uses: actions/cache@main
       id: cache
       with:
         path: test-cache
         key: ${{ matrix.key }}-runner-${{ github.run_number }}-${{ github.run_attempt }}
-      env:
-        MSYS: winsymlinks:nativestrict
 
     - shell: bash
       run: |
         ls test-cache/
         rm -rf test-cache
         ls
-        "C:\Program Files\Git\usr\bin\tar.exe" -tf cache.tzst -P --force-local --use-compress-program "zstd -d" # should fail
+        #"C:\Program Files\Git\usr\bin\tar.exe" -tf cache.tzst -P --force-local --use-compress-program "zstd -d" # should fail
         #cat test-cache/link.txt
         
 
