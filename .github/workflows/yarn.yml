@@ -10,4 +10,4 @@ jobs:
           echo ${{ github.workspace }}
           env
           pwd
-        working-directory: /c/Users/runneradmin
+        working-directory: C:\Users\runneradmin
