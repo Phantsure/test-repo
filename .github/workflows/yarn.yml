@@ -5,7 +5,5 @@ jobs:
   foo:
     runs-on: ubuntu-latest
     steps:
-      - name: ${{ github.workspace }}
-        run: echo hello
-      - name: ${{ env.HOME }}
-        run: echo hello
+      - run: echo ${{ github.workspace }}
+      - run: echo ${{ env.HOME }}
