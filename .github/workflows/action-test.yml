@@ -8,11 +8,7 @@ jobs:
       contents: read
     steps:
 
-      - name: tar version?
-        run: tar --version
-#         uses: mxschmitt/action-tmate@v3
-
       - uses: actions/cache@v3
         with:
-          path: cacheFolder
-          key: cache-3417611142
+          path: test-cache
+          key: windows-latest-runner
