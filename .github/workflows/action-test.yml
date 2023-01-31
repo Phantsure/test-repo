@@ -11,4 +11,4 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: test-cache
-          key: windows-latest-runner
+          key: ubuntu-latest-runner
