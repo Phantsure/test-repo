@@ -96,7 +96,7 @@ jobs:
       run: |
         node -e "Promise.resolve(require('./packages/cache/lib/cache').restoreCache(['test-cache'],'${{ matrix.key }}-runner-${{ github.run_number }}-${{ github.run_attempt }}', [], {}, true))"
 
-	  - run: ls test-cache
+    - run: ls test-cache
 
     - name: Fail if cache not found
       if: steps.cache.outputs.cache-hit != 'true'
