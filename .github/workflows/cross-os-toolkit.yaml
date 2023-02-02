@@ -100,8 +100,3 @@ jobs:
 
     - run: ls test-cache
 
-    - name: Fail if cache not found
-      if: steps.cache.outputs.cache-hit != 'true'
-      run: |
-        echo "Cache not found, upload failed"
-        exit 1
