@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        repository: lazka/tookit
+        repository: lazka/toolkit
         ref: 8745aa1214f7879b6db405bf9420339707e0ca7f
 
     - name: Create file to cache
@@ -62,7 +62,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        repository: lazka/tookit
+        repository: lazka/toolkit
         ref: 8745aa1214f7879b6db405bf9420339707e0ca7f
 
     - name: Set Node.js 16.x
