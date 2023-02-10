@@ -21,7 +21,7 @@ jobs:
       run: |
         mkdir test-cache
         echo "foo" > test-cache/test.txt
-        dd if=/dev/zero of=test-cache/test.img bs=1024 count=0 seek=1024
+        dd if=/dev/urandom bs=1048576 count=1 of=test-cache/test.img
     - if: ${{ runner.os != 'Windows' }}
       shell: bash
       run: ln -s ./test.txt test-cache/link.txt
